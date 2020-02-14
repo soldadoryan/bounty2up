@@ -1,0 +1,16 @@
+/web/node_modules
+/web/.pnp
+/web.pnp.js
+/api/node_modules
+/api/src/tmp
+/coverage
+/build
+.DS_Store
+/api/.env
+/api/.env.local
+/api/.env.development.local
+/api/.env.test.local
+/api/.env.production.local
+/api/npm-debug.log*
+/api/yarn-debug.log*
+/api/yarn-error.log*
