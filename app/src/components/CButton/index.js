@@ -2,15 +2,15 @@ import React from 'react';
 
 import { Button } from './styles';
 
-export default function CButton({ type, cstyle, click, title }) {
+export default function CButton({ type, cstyle, click, title, disabled }) {
   return (
     <>
       {(type === 'submit') ? (
-        <Button type={type} className={cstyle}>
+        <Button type={type} disabled={disabled} onClick={click} className={cstyle}>
           {title}
         </Button>
       ) : (
-          <Button type={type} className={cstyle} onClick={() => click}>
+          <Button type={type} disabled={disabled} onClick={click} className={cstyle}>
             {title}
           </Button>
         )}

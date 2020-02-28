@@ -21,3 +21,4 @@ export const Painel = styled.div`
   padding: 25px;
   box-shadow: 0 3px 30px rgba(0,0,0,.1), 0 3px 20px rgba(0,0,0,.1);
 `;
+

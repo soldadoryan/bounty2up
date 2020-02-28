@@ -1,18 +1,19 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
 
+import authConfig from '../../config/auth';
+
+import { promisify } from 'util';
+
 export default async (req, res, next) => {
-  const token = req.headers['jwt_token'];
+  const authHeader = req.headers.authorization;
 
-  if (!token) return res.status(401).send({
-    auth: false, error: 'Token não fornecido.'
-  });
+  if (!authHeader) return res.status(401).json({ error: 'Token not provided' });
 
-  jwt.verify(token, process.env.SECRET, function (err, decoded) {
-    if (err) return res.status(500).send({
-      auth: false, error: 'Falha para autenticar o token'
-    });
+  const [, token] = authHeader.split(' ');
 
+  try {
+    const decoded = await promisify(jwt.verify)(token, authConfig.secret);
     const getCompany = async (request, response) => {
       const user = await User.findOne({ where: { 'id': decoded.id } });
 
@@ -22,5 +23,7 @@ export default async (req, res, next) => {
     }
 
     getCompany();
-  });
+  } catch (err) {
+    return res.status(401).json({ error: 'Token invalid' });
+  }
 };

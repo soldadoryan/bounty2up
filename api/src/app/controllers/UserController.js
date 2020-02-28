@@ -1,4 +1,5 @@
 import User from '../models/User';
+import Departament from '../models/Departament';
 import sha1 from 'sha1';
 
 class UserController {
@@ -33,7 +34,14 @@ class UserController {
   async index(req, res) {
     const { companyId } = req;
 
-    const users = await User.findAll({ where: { id_company: companyId } });
+    const users = await User.findAll({
+      attributes: ['id', 'name', 'email'],
+      where: { id_company: companyId },
+      raw: true,
+      include: [
+        { model: Departament, as: 'departament', attributes: ['name'] }
+      ]
+    });
 
     return res.json(users);
   }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '../../services/api';
+import api from '../../services/api-no-auth';
 
 import { toast } from 'react-toastify';
 
@@ -7,7 +7,7 @@ import CInput from '../../components/CInput';
 import CButton from '../../components/CButton';
 
 import { Section, FormLogin } from './styles';
-import { sessionSet } from '../../session';
+import { sessionSet, sessionAdd } from '../../session';
 
 export default function Login({ history }) {
   const [email, setEmail] = useState('');
@@ -23,6 +23,7 @@ export default function Login({ history }) {
 
     if (response.success) {
       sessionSet(response.user);
+      sessionAdd('token', response.token);
       history.push('/inicial');
     }
   };
