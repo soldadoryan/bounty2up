@@ -7,6 +7,7 @@ import authMiddleware from './app/middlewares/auth';
 import UserController from './app/controllers/UserController';
 import CompanyController from './app/controllers/CompanyController';
 import SessionController from './app/controllers/SessionController';
+import DepartmentController from './app/controllers/DepartmentController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -24,6 +25,12 @@ routes.use(authMiddleware);
 routes.post('/users', UserController.store);
 routes.get('/users', UserController.index);
 routes.put('/users/:id', upload.single('avatar'), UserController.update);
-routes.delete('/users/:id', UserController.destroy);
+routes.delete('/users/:ids', UserController.destroy);
+
+// Departments
+routes.get('/departments', DepartmentController.index);
+routes.post('/departments', DepartmentController.store);
+routes.put('/departments/:id', DepartmentController.update);
+routes.delete('/departments/:ids', DepartmentController.destroy);
 
 export default routes;

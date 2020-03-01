@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import colors from '../../presets/colors';
 
-export const WrapCustomInput = styled.div`
+export const WrapCustomSelect = styled.div`
   width: 100%;
   height: 50px;
   position: relative;
@@ -19,7 +19,7 @@ export const WrapCustomInput = styled.div`
   }
 `;
 
-export const LabelCustomInput = styled.label`
+export const LabelCustomSelect = styled.label`
   background-color: white;
   position: absolute;
   top: -10px;
@@ -31,7 +31,7 @@ export const LabelCustomInput = styled.label`
   transition: color .5s;
 `;
 
-export const CustomInput = styled.input`
+export const CustomSelect = styled.select`
   background-color: transparent;
   border: 0;
   width: 100%;

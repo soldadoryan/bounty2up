@@ -36,9 +36,9 @@ module.exports = {
         onDelete: 'SET NULL',
         allowNull: true
       },
-      id_departament: {
+      id_department: {
         type: Sequelize.INTEGER,
-        references: { model: 'departaments', key: 'id' },
+        references: { model: 'departments', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true

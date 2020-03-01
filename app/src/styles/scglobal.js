@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import colors from '../presets/colors';
+
 export const Container = styled.div`
   width: calc(100vw - 230px);
   height: calc(100vh - 100px);
@@ -12,7 +14,7 @@ export const Container = styled.div`
 export const TitlePage = styled.h1`
   font-weight: 400;
   margin: 0;
-  color: #303030;
+  color: ${colors.texts};
 `;
 
 export const Painel = styled.div`

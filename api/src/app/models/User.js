@@ -10,7 +10,7 @@ class User extends Model {
         permissions: Sequelize.INTEGER,
         password: Sequelize.STRING,
         id_company: Sequelize.INTEGER,
-        id_departament: Sequelize.INTEGER,
+        id_department: Sequelize.INTEGER,
       },
       {
         sequelize
@@ -22,7 +22,7 @@ class User extends Model {
 
   static associate(models) {
     this.belongsTo(models.Company, { foreignKey: 'id_company', as: 'company' });
-    this.belongsTo(models.Departament, { foreignKey: 'id_departament', as: 'departament' });
+    this.belongsTo(models.Department, { foreignKey: 'id_department', as: 'department' });
   }
 }
 

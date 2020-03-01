@@ -18,6 +18,8 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
 
+  &:disabled { background-color: gray !important; }
+
   svg {
     font-size: 18px;
     margin-right: 5px;

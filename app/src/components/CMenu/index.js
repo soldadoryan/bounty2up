@@ -1,17 +1,24 @@
 import React from 'react';
 
 import { Menu, Button } from './styles';
-import { MdPeopleOutline } from 'react-icons/md';
+import {
+  MdPeopleOutline,
+  MdCardTravel
+} from 'react-icons/md';
 
-export default function CMenu() {
+export default function CMenu({ history }) {
   return (
     <Menu>
 
-      <Button>
+      <Button to='/users'>
         <MdPeopleOutline />
         <span>Usuários</span>
       </Button>
+      <Button to='/departments'>
+        <MdCardTravel />
+        <span>Setor</span>
+      </Button>
 
-    </Menu>
+    </Menu >
   );
 }

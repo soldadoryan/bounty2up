@@ -24,7 +24,7 @@ export default function Login({ history }) {
     if (response.success) {
       sessionSet(response.user);
       sessionAdd('token', response.token);
-      history.push('/inicial');
+      history.push('/users');
     }
   };
 

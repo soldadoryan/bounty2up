@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
+import colors from '../../presets/colors';
+
 export const Topbar = styled.div`
   width: 100%;
   height: 100px;
-  background-color: #000d1a;
+  background-color: ${colors.primary};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,7 +38,7 @@ export const Topbar = styled.div`
       font-weight: 500;
 
       span {
-        color: #0066cc;
+        color: ${colors.secondary};
         margin: 0 2px;
       }
     }

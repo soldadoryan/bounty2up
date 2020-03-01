@@ -10,10 +10,12 @@ import CModal from '../CModal';
 import ConfirmForm from '../ConfirmForm';
 import CCheckbox from '../CCheckbox';
 
-export default function CTable({ titles, values, indexes, formCustom, setItem, actionDelete }) {
+export default function CTable({ titles, values, indexes, indexesSearch, FormCustom, actionDelete, load }) {
   const [search, setSearch] = useState('');
   const [showModal, setShowModal] = useState('');
-  const [selectedItems, setSelectedItems] = useState('');
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [allSelect, setAllSelect] = useState('');
+  const [item, setItem] = useState('');
 
   const toggleSelectedItems = id => {
     if (selectedItems.includes(id)) {
@@ -24,15 +26,40 @@ export default function CTable({ titles, values, indexes, formCustom, setItem, a
     }
   };
 
+  const selectAllItems = () => {
+    if (allSelect === 'in') {
+      setSelectedItems([]);
+      setAllSelect('');
+    } else {
+      let items = [];
+      values.map(v => {
+        items.push(v.id);
+      });
+      setSelectedItems(items);
+      setAllSelect('in');
+    }
+  };
+
+  const closeModal = () => {
+    setShowModal('');
+    setItem({});
+  }
+
   return (
     <>
       {(showModal !== '') ? (
         <CModal
-          close={() => { setShowModal(''); setItem({}) }}
-          form={(showModal === 'add') ? formCustom
+          close={closeModal}
+          form={(showModal === 'add')
+            ? <FormCustom
+              item={item}
+              success={load}
+              close={closeModal}
+            />
             : <ConfirmForm action={actionDelete}
               items={selectedItems}
-              close={() => setShowModal('')}
+              close={closeModal}
+              success={load}
             />}
         />
       ) : ''}
@@ -52,7 +79,12 @@ export default function CTable({ titles, values, indexes, formCustom, setItem, a
 
         <thead>
           <tr>
-            <td></td>
+            <td>
+              <CCheckbox
+                active={allSelect}
+                click={() => selectAllItems()}
+              />
+            </td>
             {titles.map(title => <td key={title}>{title}</td>)}
             <td></td>
           </tr>
@@ -61,7 +93,7 @@ export default function CTable({ titles, values, indexes, formCustom, setItem, a
         <tbody>
           {values.filter(el => {
             let isSearch = false;
-            indexes.map(index => {
+            indexesSearch.map(index => {
               if (el[index].includes(search)) {
                 isSearch = true;
               }
@@ -75,7 +107,7 @@ export default function CTable({ titles, values, indexes, formCustom, setItem, a
                   click={() => toggleSelectedItems(value.id)}
                 />
               </td>
-              {Object.keys(value).map(el => <td key={value[el]}>{value[el]}</td>)}
+              {Object.keys(value).filter((v) => indexes.includes(v)).map(el => <td key={value[el]}>{value[el]}</td>)}
               <td className='actionstable'>
                 <CButton click={() => { setItem(value); setShowModal('add'); }} cstyle="default small" title={(<><MdEdit /> Editar</>)} />
               </td>

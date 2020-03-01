@@ -1,5 +1,5 @@
 import Company from '../models/Company';
-import Departament from '../models/Departament';
+import Department from '../models/Department';
 import User from '../models/User';
 
 import sha1 from 'sha1';
@@ -10,7 +10,7 @@ class CompanyController {
 
     const company = await Company.create({ name: companyName });
 
-    const departament = await Departament.create({
+    const department = await Department.create({
       name: 'Geral',
       id_company: company.id
     });
@@ -20,7 +20,7 @@ class CompanyController {
       email: userEmail,
       permissions: 0,
       password: sha1(userPwd),
-      id_departament: departament.id,
+      id_department: department.id,
       id_company: company.id
     });
 

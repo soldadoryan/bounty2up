@@ -1,12 +1,12 @@
 import User from '../models/User';
-import Departament from '../models/Departament';
+import Department from '../models/Department';
 import sha1 from 'sha1';
 
 class UserController {
   async store(req, res) {
     const { companyId } = req;
 
-    const { name, email, password, id_departament } = req.body;
+    const { name, email, password, id_department } = req.body;
 
     const existsUser = await User.findOne({ where: { email } });
 
@@ -23,7 +23,7 @@ class UserController {
       password: sha1(password),
       permissions: 1,
       id_company: companyId,
-      id_departament
+      id_department
     });
 
     return res.json({
@@ -35,11 +35,10 @@ class UserController {
     const { companyId } = req;
 
     const users = await User.findAll({
-      attributes: ['id', 'name', 'email'],
       where: { id_company: companyId },
       raw: true,
       include: [
-        { model: Departament, as: 'departament', attributes: ['name'] }
+        { model: Department, as: 'department' }
       ]
     });
 
@@ -49,28 +48,18 @@ class UserController {
   async update(req, res) {
     const { id } = req.params;
 
-    const { name, email, password, permissions, id_departament, } = req.body;
+    const { name, email, password, id_department } = req.body;
+
+    console.log(password);
 
     const user = await User.findByPk(id);
 
-    if (password === 'same') {
-      await user.update({
-        name,
-        email,
-        img,
-        permissions,
-        id_departament
-      });
-    } else {
-      await user.update({
-        name,
-        email,
-        img,
-        password: sha1(password),
-        permissions,
-        id_departament
-      });
-    }
+    await user.update({
+      name,
+      email,
+      password: sha1(password),
+      id_department
+    });
 
     return res.json({
       user, success: true, message: 'Usuário alterado com sucesso!'
@@ -78,11 +67,18 @@ class UserController {
   }
 
   async destroy(req, res) {
-    const { id } = req.params;
+    const { ids } = req.params;
 
-    await User.destroy({ where: { id } });
+    const arrayIds = ids.split(',');
 
-    return res.json({ success: true, message: 'Usuário deletado com sucesso!' });
+    arrayIds.map(async id => {
+      await User.destroy({ where: { id } });
+    });
+
+    return res.json({
+      success: true,
+      message: 'Usuário(s) deletado(s) com sucesso!'
+    });
   }
 }
 

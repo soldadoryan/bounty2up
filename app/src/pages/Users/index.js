@@ -9,7 +9,7 @@ import FormUsers from '../../components/Users/Form';
 import { Page } from './styles';
 import { Container, TitlePage, Painel } from '../../styles/scglobal';
 
-export default function Inicial() {
+export default function Users() {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
 
@@ -34,10 +34,12 @@ export default function Inicial() {
           <CTable
             titles={['#', 'Nome', 'E-mail', 'Cargo']}
             values={users}
-            indexes={['name', 'email']}
-            formCustom={(<FormUsers user={user} />)}
+            indexes={['id', 'name', 'email', 'department.name']}
+            indexesSearch={['name', 'email']}
+            load={getUsers}
+            FormCustom={FormUsers}
             setItem={setUser}
-            actionDelete='/users/'
+            actionDelete='/users'
           />
         </Painel>
 
