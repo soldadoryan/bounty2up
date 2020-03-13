@@ -24,7 +24,7 @@ export const Button = styled(Link)`
   color: ${colors.texts};
 
   svg {
-    font-size: 25px;
+    font-size: 20px;
     margin-right: 10px;
     color: ${colors.secondary};
   }

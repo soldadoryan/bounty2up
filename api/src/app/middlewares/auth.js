@@ -15,6 +15,7 @@ export default async (req, res, next) => {
   try {
     const decoded = await promisify(jwt.verify)(token, authConfig.secret);
     const getCompany = async (request, response) => {
+      console.log(decoded.id);
       const user = await User.findOne({ where: { 'id': decoded.id } });
 
       req.userId = decoded.id;

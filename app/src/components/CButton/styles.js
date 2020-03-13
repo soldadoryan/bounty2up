@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-import { darken } from 'polished';
+import colors from '../../presets/colors';
+
+import { darken, lighten } from 'polished';
 
 export const Button = styled.button`
   background-color: rgba(0, 0, 0, 0.1);
@@ -16,6 +18,7 @@ export const Button = styled.button`
   transition: background-color .5s;
   cursor: pointer;
   display: flex;
+  outline: none;
   align-items: center;
 
   &:disabled { background-color: gray !important; }
@@ -26,58 +29,58 @@ export const Button = styled.button`
   }
 
   &.default {
-    background-color: transparent;
+    background: ${colors.btn_default};
     box-shadow: none;
-    color: #303030;
+    color: ${colors.btn_text_default};
 
     &.small { height: 35px; padding: 0 25px; font-weight: 500; }
 
     &:hover {
-      color: #606060;
+      color: ${lighten(0.07, colors.btn_text_default)};
     }
   }
 
   &.primary {
-    background-color: #1045DB;
-    color: white;
+    background: ${colors.btn_primary};
+    color: ${colors.btn_text_primary};
 
     &.small { height: 35px; padding: 0 25px; font-weight: 500; }
 
     &:hover {
-      background: ${darken(0.07, '#1045DB')}
+      background: ${darken(0.07, colors.btn_primary)}
     }
   }
 
   &.success {
-    background-color: #0fdd4d;
-    color: white;
+    background: ${colors.btn_success};
+    color: ${colors.btn_text_success};
 
     &.small { height: 35px; padding: 0 25px; font-weight: 500; }
 
     &:hover {
-      background: ${darken(0.07, '#0fdd4d')}
+      background: ${darken(0.07, colors.btn_success)}
     }
   }
 
   &.warning {
-    background-color: #ff9900;
-    color: white;
+    background: ${colors.btn_warning};
+    color: ${colors.btn_text_warning};
 
     &.small { height: 35px; padding: 0 25px; font-weight: 500; }
 
     &:hover {
-      background: ${darken(0.07, '#ff9900')}
+      background: ${darken(0.07, colors.btn_warning)}
     }
   }
 
   &.danger {
-    background-color: #ff3300;
-    color: white;
+    background: ${colors.btn_danger};
+    color: ${colors.btn_text_danger};
 
     &.small { height: 35px; padding: 0 25px; font-weight: 500; }
 
     &:hover {
-      background: ${darken(0.07, '#ff3300')}
+      background: ${darken(0.07, colors.btn_danger)}
     }
   }
 `;
