@@ -9,7 +9,7 @@
     "mysql2": "^1.7.0",
     "sequelize": "^5.19.0",
     "sha1": "^1.1.1",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "yup": "^0.28.1"
   },
   "scripts": {
